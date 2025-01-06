@@ -1,5 +1,8 @@
 package com.udemy.springDevBootcamp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Grade {
     private String name;
     private String subject;
@@ -10,9 +13,9 @@ public class Grade {
         this.subject = subject;
         this.name = name;
     }
-
-    public Grade() {
-    }
+//
+//    public Grade() {
+//    }
 
     public String getName() {
         return name;
@@ -36,5 +39,16 @@ public class Grade {
 
     public void setScore(String score) {
         this.score = score;
+    }
+
+    // Static method to generate multiple Student data
+    public static List<Grade> generateSampleData() {
+        List<Grade> grades = new ArrayList<>();
+        grades.add(new Grade("A+", "Math", "Ashraful Karim"));
+        grades.add(new Grade("B-", "Science", "Ehsan Hoque"));
+        grades.add(new Grade("C+", "History", "Alvi Rahman"));
+        grades.add(new Grade("B-", "Art", "Shanto Pagla"));
+        grades.add(new Grade("A-", "Music", "Shamim Khan"));
+        return grades;
     }
 }
