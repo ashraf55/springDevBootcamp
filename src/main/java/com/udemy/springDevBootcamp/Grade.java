@@ -48,7 +48,9 @@ public class Grade {
         grades.add(new Grade("B-", "Science", "Ehsan Hoque"));
         grades.add(new Grade("C+", "History", "Alvi Rahman"));
         grades.add(new Grade("B-", "Art", "Shanto Pagla"));
-        grades.add(new Grade("A-", "Music", "Shamim Khan"));
+        grades.add(new Grade("A-", "Biology", "Shamim Khan"));
+        grades.add(new Grade("C-", "Music", "Ayesha Sultana"));
+        grades.add(new Grade("B-", "Physics", "Rifat Shahran"));
         return grades;
     }
 }
