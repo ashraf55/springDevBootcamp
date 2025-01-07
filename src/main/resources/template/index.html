@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Incremental Letters</title>
+</head>
+<body>
+<h1>Incremental Letters of the Name</h1>
+<ul>
+    <li th:each="i : ${#numbers.sequence(1, #strings.length(${fullName}))}"
+        th:text="${#strings.substring(${fullName}, 0, i)}"></li>
+</ul>
+</body>
+</html>
