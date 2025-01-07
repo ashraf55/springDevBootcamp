@@ -5,9 +5,10 @@
 </head>
 <body>
 <h1>Incremental Letters of the Name</h1>
+<h3 th:text="'The full name is: ' + ${name}"></h3>
 <ul>
-    <li th:each="i : ${#numbers.sequence(1, #strings.length(${fullName}))}"
-        th:text="${#strings.substring(${fullName}, 0, i)}"></li>
+    <li th:each="i : ${#numbers.sequence(1, #strings.length(name))}"
+        th:text="${#strings.substring(name, 0, i)}"></li>
 </ul>
 </body>
 </html>

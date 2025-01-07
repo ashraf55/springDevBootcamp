@@ -9,7 +9,8 @@ public class UtilityMethod {
 
     @GetMapping("/name")
     public String getMethodName(Model model){
-        model.addAttribute("fullName", "Ashraful Karim");
+        model.addAttribute("name","Kayser Ahmed");
         return "view";
     }
+
 }
