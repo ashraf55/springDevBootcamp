@@ -2,20 +2,16 @@ package com.udemy.springDevBootcamp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Grade {
     private String name;
     private String subject;
     private String score;
-
-    public Grade(String score, String subject, String name) {
-        this.score = score;
-        this.subject = subject;
-        this.name = name;
-    }
+    private String id;
 
     public Grade() {
-
+        this.id = UUID.randomUUID().toString();
     }
 
     public String getName() {
@@ -42,7 +38,15 @@ public class Grade {
         this.score = score;
     }
 
-//    Static method to generate multiple Student data
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //    Static method to generate multiple Student data
 //    2nd step: loading multiple data in grid view
 //    public static List<Grade> generateSampleData() {
 //        List<Grade> grades = new ArrayList<>();
