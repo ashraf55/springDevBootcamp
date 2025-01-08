@@ -23,14 +23,15 @@ public class GradeController {
 //        } else {
 //            grade = studentGrades.get(getGradeIndex(name));
 //        }
-        model.addAttribute("grade", getGradeIndex(id) == -1000 ? new Grade() : studentGrades.get(getGradeIndex(id)));
+        int index = getGradeIndex(id);
+        model.addAttribute("grade", index == Constants.NOT_FOUND ? new Grade() : studentGrades.get(index));
         return "form";
     }
 
     @PostMapping("/handleSubmit")
     public String submitForm(Grade grade){
         int index = getGradeIndex(grade.getId());
-        if(index == -1000){
+        if(index == Constants.NOT_FOUND){
             studentGrades.add(grade);
         }else{
             studentGrades.set(index, grade);
@@ -59,6 +60,6 @@ public class GradeController {
             if(studentGrades.get(i).getId().equals(id))
                 return i;
         }
-        return -1000;
+        return Constants.NOT_FOUND;
     }
 }
