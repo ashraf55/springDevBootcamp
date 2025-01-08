@@ -19,4 +19,10 @@ public class GradeController {
         model.addAttribute("grades", grades);
         return "grades";
     }
+
+    @GetMapping("/")
+    public String gradeForm(Model model){
+        model.addAttribute("grade", new Grade("C-", "English", "Harry"));
+        return "form";
+    }
 }
