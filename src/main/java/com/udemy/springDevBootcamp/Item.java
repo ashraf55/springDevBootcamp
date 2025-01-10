@@ -1,6 +1,7 @@
 package com.udemy.springDevBootcamp;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Item {
@@ -61,4 +62,10 @@ public class Item {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getFormatDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(date);
+    }
+
 }
