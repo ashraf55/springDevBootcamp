@@ -10,6 +10,10 @@
         <div class="alert success" th:if="${status} == 'success'">
             <strong> You successfully submited the item! </strong>
         </div>
+        <div class="alert" th:if="${status} == 'failed'">
+            <strong > You failed to submit the item. </strong>
+        </div>
+
         <div class="container">
            <table>
               <tr class="head">

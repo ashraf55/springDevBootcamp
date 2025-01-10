@@ -9,7 +9,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class StoreController {
@@ -27,12 +29,15 @@ public class StoreController {
     @PostMapping("/saveItem")
     public String submitItem(Item item, RedirectAttributes redirectAttributes){
         int index = getIndexFromID(item.getId());
+        String status = Constants.SUCCESS_STATUS;
         if(index == Constants.NOT_FOUND){
             itemsList.add(item);
-        }else{
+        } else if(within5Days(item.getDate(), itemsList.get(index).getDate())){
             itemsList.set(index, item);
+        }else{
+            status = Constants.FAILED_STATUS;
         }
-        redirectAttributes.addFlashAttribute("status", Constants.SUCCESS_STATUS);
+        redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/inventory";
     }
 
@@ -47,6 +52,11 @@ public class StoreController {
             if(itemsList.get(i).getId().equals(id)) return i;
         }
         return Constants.NOT_FOUND;
+    }
+
+    public boolean within5Days(Date newDate, Date oldDate) {
+        long diff = Math.abs(newDate.getTime() - oldDate.getTime());
+        return (int) (TimeUnit.MILLISECONDS.toDays(diff)) <= 5;
     }
 
 }
