@@ -1,5 +1,6 @@
 package com.udemy.springDevBootcamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class Item {
@@ -7,9 +8,18 @@ public class Item {
     private String name;
     private Double price;
     private Double discount;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date date;
 
     public Item() {
+    }
+
+    public Item(String category, String name, Double price, Double discount, Date date) {
+        this.category = category;
+        this.name = name;
+        this.price = price;
+        this.discount = discount;
+        this.date = date;
     }
 
     public Date getDate() {
