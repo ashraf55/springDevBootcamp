@@ -3,6 +3,7 @@ package com.udemy.springDevBootcamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 public class Item {
     private String category;
@@ -11,16 +12,10 @@ public class Item {
     private Double discount;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date date;
+    private String id;
 
     public Item() {
-    }
-
-    public Item(String category, String name, Double price, Double discount, Date date) {
-        this.category = category;
-        this.name = name;
-        this.price = price;
-        this.discount = discount;
-        this.date = date;
+        this.id = UUID.randomUUID().toString();
     }
 
     public Date getDate() {
@@ -61,6 +56,14 @@ public class Item {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFormatDate() {
