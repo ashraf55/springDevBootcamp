@@ -1,16 +1,22 @@
 package com.udemy.springDevBootcamp;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
 public class Item {
+    @NotBlank(message = "Please choose a category !!")
     private String category;
+    @NotBlank(message = "Name is mandatory !!")
     private String name;
+    @NotNull(message = "Price is mandatory !!")
     private Double price;
     private Double discount;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull(message = "Date is mandatory !!")
     private Date date;
     private String id;
 

@@ -1,7 +1,9 @@
 package com.udemy.springDevBootcamp;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +29,11 @@ public class StoreController {
     }
 
     @PostMapping("/saveItem")
-    public String submitItem(Item item, RedirectAttributes redirectAttributes){
+    public String submitItem(@Valid Item item, BindingResult result, RedirectAttributes redirectAttributes){
+        //checking mandatory fields
+        if(result.hasErrors()) return "form";
+
+        //working with the form
         int index = getIndexFromID(item.getId());
         String status = Constants.SUCCESS_STATUS;
         if(index == Constants.NOT_FOUND){
