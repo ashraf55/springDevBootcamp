@@ -30,6 +30,11 @@ public class StoreController {
 
     @PostMapping("/saveItem")
     public String submitItem(@Valid Item item, BindingResult result, RedirectAttributes redirectAttributes){
+        //checking cross validation so that price is not less than discount
+        if(item.getPrice() < item.getDiscount()){
+            result.rejectValue("price", "", "Price cannot be less than discount");
+        }
+
         //checking mandatory fields
         if(result.hasErrors()) return "form";
 
