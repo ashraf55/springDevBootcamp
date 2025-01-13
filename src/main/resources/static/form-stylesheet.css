@@ -52,7 +52,8 @@
    }
 
     form .half {
-        width: calc(50% - 1px); 
+        width: calc(49.5% - 1px);
+        /*border: 1px solid blue;*/
     }
 
     input[type=date] {
@@ -89,5 +90,8 @@
       background-color: green;
       color: white;
     }
-    
-    
+
+    .full {
+       width: 100%;
+       /*border: 1px solid red;*/
+    }
