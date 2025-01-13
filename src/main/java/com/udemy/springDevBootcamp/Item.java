@@ -1,22 +1,25 @@
 package com.udemy.springDevBootcamp;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
 public class Item {
-    @NotBlank(message = "Please choose a category !!")
+    @NotBlank(message = "Please choose a category")
     private String category;
-    @NotBlank(message = "Name is mandatory !!")
+    @NotBlank(message = "Name is mandatory")
     private String name;
-    @NotNull(message = "Price is mandatory !!")
+    @Min(value = 0, message = "Price cannot be negative")
     private Double price;
+    @Min(value = 0, message = "Discount cannot be negative")
     private Double discount;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @NotNull(message = "Date is mandatory !!")
+    @Past(message = "Date must be of the past")
     private Date date;
     private String id;
 
