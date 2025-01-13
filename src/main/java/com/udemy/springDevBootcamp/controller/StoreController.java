@@ -2,6 +2,7 @@ package com.udemy.springDevBootcamp.controller;
 
 import com.udemy.springDevBootcamp.Constants;
 import com.udemy.springDevBootcamp.Item;
+import com.udemy.springDevBootcamp.repository.StoreRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +21,12 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class StoreController {
 
-    List<Item> itemsList = new ArrayList<>();
+    StoreRepository storeRepository = new StoreRepository();
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id){
         int index = getIndexFromID(id);
-        model.addAttribute("item", index == Constants.NOT_FOUND ? new Item() : itemsList.get(index));
+        model.addAttribute("item", index == Constants.NOT_FOUND ? new Item() : storeRepository.getItemsList(index));
         model.addAttribute("categories", Constants.CATEGORIES);
         return "form";
     }
@@ -44,9 +45,9 @@ public class StoreController {
         int index = getIndexFromID(item.getId());
         String status = Constants.SUCCESS_STATUS;
         if(index == Constants.NOT_FOUND){
-            itemsList.add(item);
-        } else if(within5Days(item.getDate(), itemsList.get(index).getDate())){
-            itemsList.set(index, item);
+            storeRepository.addItem(item);
+        } else if(within5Days(item.getDate(), storeRepository.getItemsList(index).getDate())){
+            storeRepository.updateItem(item,index);
         }else{
             status = Constants.FAILED_STATUS;
         }
@@ -56,13 +57,13 @@ public class StoreController {
 
     @GetMapping("/inventory")
     public String getInventory(Model model){
-        model.addAttribute("items", itemsList);
+        model.addAttribute("items", storeRepository.getAllItems());
         return "inventory";
     }
 
     public int getIndexFromID(String id){
-        for (int i =0; i<itemsList.size(); i++){
-            if(itemsList.get(i).getId().equals(id)) return i;
+        for (int i =0; i<storeRepository.getAllItems().size(); i++){
+            if(storeRepository.getAllItems().get(i).getId().equals(id)) return i;
         }
         return Constants.NOT_FOUND;
     }
