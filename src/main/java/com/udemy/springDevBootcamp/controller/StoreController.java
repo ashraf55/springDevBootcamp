@@ -2,7 +2,7 @@ package com.udemy.springDevBootcamp.controller;
 
 import com.udemy.springDevBootcamp.Constants;
 import com.udemy.springDevBootcamp.Item;
-import com.udemy.springDevBootcamp.repository.StoreRepository;
+import com.udemy.springDevBootcamp.service.StoreService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +21,12 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class StoreController {
 
-    StoreRepository storeRepository = new StoreRepository();
+    StoreService storeService = new StoreService();
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id){
-        int index = getIndexFromID(id);
-        model.addAttribute("item", index == Constants.NOT_FOUND ? new Item() : storeRepository.getItemsList(index));
+
+        model.addAttribute("item", storeService.getItemById(id));
         model.addAttribute("categories", Constants.CATEGORIES);
         return "form";
     }
@@ -42,12 +42,12 @@ public class StoreController {
         if(result.hasErrors()) return "form";
 
         //working with the form
-        int index = getIndexFromID(item.getId());
+        int index = storeService.getItemIndex(item.getId());
         String status = Constants.SUCCESS_STATUS;
         if(index == Constants.NOT_FOUND){
-            storeRepository.addItem(item);
-        } else if(within5Days(item.getDate(), storeRepository.getItemsList(index).getDate())){
-            storeRepository.updateItem(item,index);
+            storeService.addItem(item);
+        } else if(within5Days(item.getDate(), storeService.getItemsList(index).getDate())){
+            storeService.updateItem(item,index);
         }else{
             status = Constants.FAILED_STATUS;
         }
@@ -57,15 +57,8 @@ public class StoreController {
 
     @GetMapping("/inventory")
     public String getInventory(Model model){
-        model.addAttribute("items", storeRepository.getAllItems());
+        model.addAttribute("items", storeService.getAllItems());
         return "inventory";
-    }
-
-    public int getIndexFromID(String id){
-        for (int i =0; i<storeRepository.getAllItems().size(); i++){
-            if(storeRepository.getAllItems().get(i).getId().equals(id)) return i;
-        }
-        return Constants.NOT_FOUND;
     }
 
     public boolean within5Days(Date newDate, Date oldDate) {
