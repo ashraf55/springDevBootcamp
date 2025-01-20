@@ -27,6 +27,9 @@ public class Item {
         this.id = UUID.randomUUID().toString();
     }
 
+    public Item(String furniture, String bed, String number, String number1, String date) {
+    }
+
     public Date getDate() {
         return date;
     }
