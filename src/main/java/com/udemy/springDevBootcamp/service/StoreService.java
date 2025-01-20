@@ -3,12 +3,16 @@ package com.udemy.springDevBootcamp.service;
 import com.udemy.springDevBootcamp.Constants;
 import com.udemy.springDevBootcamp.Item;
 import com.udemy.springDevBootcamp.repository.StoreRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class StoreService {
 
-    StoreRepository storeRepository = new StoreRepository();
+    @Autowired
+    StoreRepository storeRepository;
 
     public Item getItemsList(int index){
         return storeRepository.getItemsList(index);

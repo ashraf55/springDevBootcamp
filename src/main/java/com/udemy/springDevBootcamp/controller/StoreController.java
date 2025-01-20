@@ -4,6 +4,7 @@ import com.udemy.springDevBootcamp.Constants;
 import com.udemy.springDevBootcamp.Item;
 import com.udemy.springDevBootcamp.service.StoreService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +22,8 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class StoreController {
 
-    StoreService storeService = new StoreService();
+    @Autowired
+    StoreService storeService;
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id){

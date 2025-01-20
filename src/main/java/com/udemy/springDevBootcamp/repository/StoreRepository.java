@@ -1,9 +1,12 @@
 package com.udemy.springDevBootcamp.repository;
 
 import com.udemy.springDevBootcamp.Item;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class StoreRepository {
     private List<Item> itemsList = new ArrayList<>();
 
