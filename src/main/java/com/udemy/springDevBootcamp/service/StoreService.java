@@ -5,10 +5,11 @@ import com.udemy.springDevBootcamp.Item;
 import com.udemy.springDevBootcamp.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class StoreService {
 
     @Autowired
